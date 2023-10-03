@@ -1,0 +1,90 @@
+
+body{
+    background-image: url("peleWithGradient.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+p {
+font-family: Verdana;
+font-size: 14px;
+}
+
+.yellowsquare{
+    border-radius: 10px;
+    /*background-color: yellow;*/
+    background-image: radial-gradient(#ffff99, yellow); 
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    z-index: 2;
+    margin-left: 50px;
+    margin-top: 50px;
+    
+    
+    
+}
+
+.greensquare{
+    background-color: rgb(13, 99, 10);
+    border-radius: 10px;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    z-index: 1;
+    margin-left: 60px;
+    margin-top: 60px;
+}
+.theBiggerContainer{
+    width: 80%;
+    height: auto;
+    padding: 15px;
+    /*box-sizing: border-box;
+    border-width: 2 px;
+    border-style: solid;*/
+    position: absolute;
+    margin-left: 150px;
+    margin-top: 150px;
+    z-index: 2;
+
+}
+
+.mainContainer {
+    width: 40%;
+    float: left;
+
+    
+    border-style: none;
+    
+    /*border-color: rgb(252, 235, 2);*/
+    border-left-style: solid;
+    border-left-color: rgb(13, 99, 10);
+    border-left-width: 8px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+   }
+ .middleContainer {
+    width: 50px;
+    float: left;
+    padding: 50px;
+}
+
+.smallContainer {
+    width: 25%;
+    float: left;
+    padding: 10px;
+    border-style: none;
+    
+    /*border-color: rgb(252, 235, 2);*/
+    border-left-style: solid;
+    border-left-color: rgb(13, 99, 10);
+    border-left-width: 8px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+    font-size: 32px;
+    padding-top: 0%;
+}

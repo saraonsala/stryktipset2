@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ge stryktipset stryk - 2022</title>
+    <link rel="stylesheet" href="/statics/style.css">   
+</head>
+<body>
+    <div class="yellowsquare">
+
+    </div>
+    <div class="greensquare">
+
+    </div>
+    <div class="theBiggerContainer">
+        <div class="mainContainer">
+            <h1>Äntligen dags för 13 rätt!</h1>
+            <p>Nedan ser du nästa omgång på Stryktipset. Efter varje match preseteras sannolikhethet
+                för varje utfall av 1, X eller 2. Uträkningarna bygger på samtliga matcher spelade under sässongen, där sedan
+                en sannlikhet för varje resultat är uträknad genom s.k. Poissonfördelning. 
+                
+            OBS! Systemet är byggt på det engelska ligapselet och 
+            kommer således inte kunna användas juni-augusti då det engelska ligaspelet vilar.
+            </p>
+            
+                <table>
+                    <tbody>
+                        
+                        {%for post in posts %} 
+                        <tr>                            
+                            <p>
+                                <td>{{ post[0] }}:<b>{{ post[1] }}-{{ post[2] }}</b></td>
+                                <td>{{ post[3] }}</td>
+                            </p>    
+                        </tr>
+                        {% endfor %}                    
+                        </p>
+                    </tbody>
+                </table>
+            
+        </div>
+        <div class="middleContainer"></div>
+        <div class="smallContainer">
+            <h2>Hur görs uträkningarna?</h2>
+            <p>Poissonfördelning: Poissonfördelning är en diskret sannolikhetsfördelning som används för att beskriva företeelser som inträffar oberoende av varandra, till exempel att en partikel sönderfaller 
+            i ett radioaktivt preparat eller att samtal inkommer till en telefonväxel. Funktionen är uppkallad efter Siméon Denis Poisson.</p>
+            <img src="statics/poissonfördelning.svg">
+            <br><h2>ToDo</h2>
+            <p>*Färglägga efter starkaste tecken</p> 
+            <p>*Kontrollera siffrona</p>
+            <p>*Kan man få in en formel som utvärderar? Hur många % behövs i snitt för att en 1:a skall falla in?</p>
+            <p>*Excelmatris, vilka reslutat faller in osv</p>
+            <br><h2>Utfall av tipstecknen</h2>  
+            <p>(OBS! Denna statistik är inte implementerad ännu) Hur har utfallet av tipstecknen egentligen sett ut de senaste åren? Vi har gjort en sammanställning för perioden 
+            vecka 1 år 2015 till vecka 11 år 2020 - sammanlagt 272 omgångar för Stryktipset och 529 för Europatipset. Lottning 
+            inkluderat.
+            <br><br>
+            STRYKTIPSET, antal teckenförekomster<br>
+            1) 1585 gånger<br>
+            x) 864 gånger<br>
+            2) 1087 gånger<br><br>
+
+            Genomsnitt antal teckenförekomster<br>
+            1) 5,83 st per omgång (44,85%)<br>
+            X) 3,18 st per omgång (24,46%)<br>
+            2) 3,99 st per omgång (30,69%)<br><br>
+
+            EUROPATIPSET, antal teckenförekomster<br>
+            1) 3069 gånger<br>
+            X) 1720 gånger<br>
+            2) 2088 gånger<br><br>
+
+            Genomsnitt antal teckenförekomster<br>
+            1) 5,80 st per omgång (44,62%)<br>
+            X) 3,25 st per omgång (25,00%)<br>
+            2) 3,95 st per omgång (30,38%)<br><br>
+
+            Utfallet av tipstecknen i snitt är i stort sett densamma på både Stryktipset och 
+            Europatipset, oavsett på kort eller lång sikt. Detta för oss också naturligt in 
+            på hemmaplansfördel i fotboll.</p><br>
+            <p><i>Källa: https://www.speltjanst.se/Statistics</i></p>
+        </div>
+    </div>
+</body>
+</html>
