@@ -3,7 +3,7 @@ from competition import *
 from coupon import *
 from sendToSlack import *
 
-print("Startar Pelles fotbollsprogram 2.0 - Stryktipset...")
+print("Startar Per fotbollsprogram 2.0 - Stryktipset...")
 #testar
 #URL:er till csv-filer online
 urlPremierLeague = "https://www.football-data.co.uk/mmz4281/2223/E0.csv"
