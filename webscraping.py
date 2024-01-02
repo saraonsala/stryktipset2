@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 def cleanTeamNames(strTeamName):
         #Undantagshantering för alla lag som har en avvikande stavning på sidan (se variabel strURL nedan)
         #som stryktipskupongen hämtas ifrån
-        
+        #print ("I", strTeamName, "I")
         if strTeamName == 'Manchester City': 
                 return 'Man City'
         elif strTeamName == 'Crystal Palace ':
@@ -35,6 +35,9 @@ def cleanTeamNames(strTeamName):
                 return "West Brom"
         elif strTeamName == 'Charlton':
                 return "Charlton"
+        #elif strTeamName == 'Ipswich':
+        #        print("Nu är de här")
+        #        return "Ipswich"
         else: return strTeamName
 
 def getNext13Games(thisCoupon, premierLeague, championship):

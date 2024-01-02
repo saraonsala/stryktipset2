@@ -10,7 +10,7 @@ championship = Competition(urlChampionship)
 
 
 
-strHomeTeam = "Brighton"
+strHomeTeam = "Ipswich"
 strAwayTeam ="Liverpool"
 
 print("Hemmamål snitt i ligan: " + str(premierLeague.getAverageGoalsByAllHomeTeams()))

@@ -6,8 +6,8 @@ from sendToSlack import *
 print("Startar Per fotbollsprogram 2.0 - Stryktipset...")
 #testar
 #URL:er till csv-filer online
-urlPremierLeague = "https://www.football-data.co.uk/mmz4281/2223/E0.csv"
-urlChampionship = "https://www.football-data.co.uk/mmz4281/2223/E1.csv"
+urlPremierLeague = "https://www.football-data.co.uk/mmz4281/2324/E0.csv"
+urlChampionship = "https://www.football-data.co.uk/mmz4281/2324/E1.csv"
 
 premierLeague = Competition(urlPremierLeague)
 championship = Competition(urlChampionship)
@@ -25,7 +25,7 @@ thisCoupon.sortBestAwayTeams()
 thisCoupon.sortBestDrawTeams()
 thisCoupon.sortListBasedOnMatchOrder()
 #Nästkommande funktion har möjligheten att ange hur många 1 X 2 man vil ha)?
-thisCoupon.addSigns(6,4,4)
+thisCoupon.addSigns(8,6,6)
 #thisCoupon.printCoupon()
 
 webhook = "https://hooks.slack.com/services/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"
