@@ -2,9 +2,10 @@ import requests
 from competition import *
 from bs4 import BeautifulSoup
 from couponRow import CouponRow
+from links import *
 
 def cleanTeamNames(strTeamName):
-        #Undantagshantering för alla lag som har en avvikande stavning på sidan (se variabel strURL nedan)
+        #Undantagshantering för alla lag som har en avvikande stavning på sidan (se variabel strURL i Links.py)
         #som stryktipskupongen hämtas ifrån
         
         if strTeamName == 'Manchester City': 
@@ -33,7 +34,8 @@ def cleanTeamNames(strTeamName):
 
 def getNext13Games(thisCoupon, premierLeague, championship):
         #Webscraping, plockar ut nästa veckas stryktipsmatcher
-        strUrl = 'https://tipsrader.se/'
+        #se Links-filen för URL till sidan som vi hämtar datan ifrån
+        strUrl = strStryktipsetURL
         hometeams=[]
         awayteams=[]
         response = requests.get(strUrl)
@@ -45,13 +47,8 @@ def getNext13Games(thisCoupon, premierLeague, championship):
         for i in range(13):
                 if premierLeague.isTeamInCompetition(awayteams[i]):
                         thisCoupon.addCouponRow(home_team=hometeams[i], away_team=awayteams[i], numberofRowsinArray=i)
-
-
                 elif championship.isTeamInCompetition(awayteams[i]):
                         thisCoupon.addCouponRow(home_team=hometeams[i], away_team=awayteams[i], numberofRowsinArray=i)
-
-
- 
                 else:
                         print(":"+awayteams[i] + ":. Kunde inte hitta bortalaget. Troligtvis felstavat eller i en annan liga  ")             
 
