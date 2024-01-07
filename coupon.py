@@ -6,10 +6,19 @@ class Coupon:
                 #Initierar en kupong som på det hela taget bara innehåller en array med rader.
                 self.couponrows = []
 
+        def addCouponRow(self, home_team, away_team, numberofRowsinArray):
+        # Add a row to the coupon.
+                coupon_row = CouponRow(home_team, away_team, numberofRowsinArray)
+                self.couponrows.append(coupon_row)
 
-        def addCouponRow(self, homeTeam, awayTeam):
-                newCouponRow = CouponRow(homeTeam, awayTeam, len(self.couponrows))
-                self.couponrows.append(newCouponRow)
+        def getRows(self):
+                # Return the coupon rows.
+                return self.couponrows
+
+        #min egna gamla CouponRow
+        #def addCouponRow(self, homeTeam, awayTeam):
+        #        newCouponRow = CouponRow(homeTeam, awayTeam, len(self.couponrows))
+        #        self.couponrows.append(newCouponRow)
         
         def sortListBasedOnMatchOrder(self):
                 #Sorterar listan efter matchordning. Precis som den är på kupongen helt enkelt
@@ -18,7 +27,7 @@ class Coupon:
         
         
         def sortBestHomeTeams(self):
-                #Sorterar listann efter bästa sannlikhet att vinna på hemmaplan. 
+                #Sorterar listan efter bästa sannlikhet att vinna på hemmaplan. 
                 #Sorterar först listan och ger sedan varje rad sitt index i fältet homeProbOrder
                 self.couponrows.sort(key = operator.attrgetter('homeProb'),reverse=True)
                 i=1
@@ -27,7 +36,7 @@ class Coupon:
                         i+=1
         
         def sortBestAwayTeams(self):
-                #Sorterar listann efter bästa sannlikhet att vinna på bortaplan. 
+                #Sorterar listan efter bästa sannlikhet att vinna på bortaplan. 
                 #Sorterar först listan och ger sedan varje rad sitt index i fältet awayProbOrder
                 self.couponrows.sort(key = operator.attrgetter('awayProb'),reverse=True)
                 i=1
@@ -37,7 +46,7 @@ class Coupon:
 
 
         def sortBestDrawTeams(self):
-                #Sorterar listann efter bästa sannolikhet för att spela oavgjort. 
+                #Sorterar listan efter bästa sannolikhet för att spela oavgjort. 
                 #Sorterar först listan och ger sedan varje rad sitt index i fältet drawProbOrder
                 self.couponrows.sort(key = operator.attrgetter('drawProb'),reverse=True)
                 i=1

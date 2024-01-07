@@ -1,18 +1,12 @@
 import requests
 from competition import *
 from bs4 import BeautifulSoup
-
-#urlPremierLeague = "https://www.football-data.co.uk/mmz4281/2223/E0.csv"
-#urlChampionship = "https://www.football-data.co.uk/mmz4281/2223/E1.csv"
-
-#premierLeague = Competition(urlPremierLeague)
-#championship = Competition(urlChampionship)
-
+from couponRow import CouponRow
 
 def cleanTeamNames(strTeamName):
         #Undantagshantering för alla lag som har en avvikande stavning på sidan (se variabel strURL nedan)
         #som stryktipskupongen hämtas ifrån
-        #print ("I", strTeamName, "I")
+        
         if strTeamName == 'Manchester City': 
                 return 'Man City'
         elif strTeamName == 'Crystal Palace ':
@@ -35,9 +29,6 @@ def cleanTeamNames(strTeamName):
                 return "West Brom"
         elif strTeamName == 'Charlton':
                 return "Charlton"
-        #elif strTeamName == 'Ipswich':
-        #        print("Nu är de här")
-        #        return "Ipswich"
         else: return strTeamName
 
 def getNext13Games(thisCoupon, premierLeague, championship):
@@ -53,11 +44,18 @@ def getNext13Games(thisCoupon, premierLeague, championship):
                 awayteams.append(cleanTeamNames(tag.text))         
         for i in range(13):
                 if premierLeague.isTeamInCompetition(awayteams[i]):
-                        thisCoupon.addCouponRow(hometeams[i], awayteams[i])
+                        thisCoupon.addCouponRow(home_team=hometeams[i], away_team=awayteams[i], numberofRowsinArray=i)
+
+
                 elif championship.isTeamInCompetition(awayteams[i]):
-                        thisCoupon.addCouponRow(hometeams[i], awayteams[i])
+                        thisCoupon.addCouponRow(home_team=hometeams[i], away_team=awayteams[i], numberofRowsinArray=i)
+
+
+ 
                 else:
-                        print(":"+awayteams[i] + ":. Kunde inte hitta bortalaget. Troligtvis felstavat eller i en annan liga  ")               
+                        print(":"+awayteams[i] + ":. Kunde inte hitta bortalaget. Troligtvis felstavat eller i en annan liga  ")             
+
+                        
                 
         
                         

@@ -15,15 +15,29 @@
     <div class="theBiggerContainer">
         <div class="mainContainer">
             <h1>Äntligen dags för 13 rätt!</h1>
-            <ul>
-                {% for row in coupon_rows %}
-                  <li>
-                    Match {{ row.matchnumber }}: {{ row.homeTeam }} vs {{ row.awayTeam }}
-                    Probabilities - Home: {{ row.homeProb }}, Draw: {{ row.drawProb }}, Away: {{ row.awayProb }}
-                    Choices - 1: {{ row.one }}, 2: {{ row.two }}, X: {{ row.ex }}, Combined: {{ row.combined }}
-                  </li>
-                {% endfor %}
-              </ul>
+            <p>Nedan ser du nästa omgång på Stryktipset. Efter varje match preseteras sannolikhethet
+                för varje utfall av 1, X eller 2. Uträkningarna bygger på samtliga matcher spelade under sässongen, där sedan
+                en sannlikhet för varje resultat är uträknad genom s.k. Poissonfördelning. 
+                
+            OBS! Systemet är byggt på det engelska ligapselet och 
+            kommer således inte kunna användas juni-augusti då det engelska ligaspelet vilar.
+            </p>
+            
+                <table>
+                    <tbody>
+                        
+                        {%for post in posts %} 
+                        <tr>                            
+                            <p>
+                                <td>{{ post[0] }}:<b>{{ post[1] }}-{{ post[2] }}</b></td>
+                                <td>{{ post[3] }}</td>
+                            </p>    
+                        </tr>
+                        {% endfor %}                    
+                        </p>
+                    </tbody>
+                </table>
+            
         </div>
         <div class="middleContainer"></div>
         <div class="smallContainer">
