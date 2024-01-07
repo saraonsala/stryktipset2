@@ -5,16 +5,12 @@ from sendToSlack import *
 from links import *
 
 print("Startar Pelles fotbollsprogram 2.0 - Stryktipset...")
-#testar
-#URL:er till csv-filer online
-urlPremierLeague = strPremierLeague 
-urlChampionship = strChampionship
 
-premierLeague = Competition(urlPremierLeague)
-championship = Competition(urlChampionship)
+premierLeague = Competition(strPremierLeague)
+championship = Competition(strChampionship)
 
 thisCoupon = Coupon()
-getNext13Games(thisCoupon, premierLeague, championship)
+getNext13Games(thisCoupon, strPremierLeague, strChampionship)
 #Hämtar sannolikhet för alla rader
 for row in thisCoupon.couponrows:
     if premierLeague.isTeamInCompetition(row.awayTeam):
@@ -29,6 +25,6 @@ thisCoupon.sortListBasedOnMatchOrder()
 thisCoupon.addSigns(6,4,4)
 #thisCoupon.printCoupon()
 
-webhook = "https://hooks.slack.com/services/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"
+webhook = strSlackWebhook
 payload = {"text": thisCoupon.createPayloadMessage()}
 send_slack_message(payload, webhook)

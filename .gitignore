@@ -1,6 +1,10 @@
 .env
-testarea.py
+mytestarea.py
 links.py
+/__pycache__
+
+#nedanför denna kommentar är en boilerplate som jag hittade online för python
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

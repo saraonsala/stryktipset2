@@ -75,3 +75,13 @@ class Coupon:
                 for i in self.couponrows:
                         s = s+"\n"+str(i.matchnumber) +":"+ i.homeTeam +"-"+i.awayTeam+","+i.combined
                 return s
+        
+        def printDebugInfo(self):
+                #Endast för debugsyfte
+                print("Coupon Debug Info:")
+                print("Number of Rows:", len(self.couponrows))
+                for i, row in enumerate(self.couponrows):
+                    print(f"Row {i + 1} - Match: {row.matchnumber}, Teams: {row.homeTeam}-{row.awayTeam}, Combined: {row.combined}")
+                    print(f"   Home Prob Order: {row.homeProbOrder}, Away Prob Order: {row.awayProbOrder}, Draw Prob Order: {row.drawProbOrder}")
+                    print(f"   1: {row.one}, X: {row.ex}, 2: {row.two}")
+                    print("")
