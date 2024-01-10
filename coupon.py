@@ -68,9 +68,10 @@ class Coupon:
 
         def printCoupon(self):
                 for i in self.couponrows:
-                        print(str(i.matchnumber) +":"+ i.homeTeam +"-"+i.awayTeam+","+i.combined)
+                        print(str(i.matchnumber) +":"+ i.homeTeam +"-"+i.awayTeam+"["+i.homeProb+":"+i.drawProb+":"+i.awayProb+"]:"+i.combined)
 
         def createPayloadMessage(self):
+                #För meddelande till Slack
                 s = ""
                 for i in self.couponrows:
                         s = s+"\n"+str(i.matchnumber) +":"+ i.homeTeam +"-"+i.awayTeam+","+i.combined
@@ -82,6 +83,6 @@ class Coupon:
                 print("Number of Rows:", len(self.couponrows))
                 for i, row in enumerate(self.couponrows):
                     print(f"Row {i + 1} - Match: {row.matchnumber}, Teams: {row.homeTeam}-{row.awayTeam}, Combined: {row.combined}")
-                    print(f"   Home Prob Order: {row.homeProbOrder}, Away Prob Order: {row.awayProbOrder}, Draw Prob Order: {row.drawProbOrder}")
+                    print(f"   Home Prob Order: {row.homeProb}, Away Prob Order: {row.awayProb}, Draw Prob Order: {row.drawProb}")
                     print(f"   1: {row.one}, X: {row.ex}, 2: {row.two}")
                     print("")

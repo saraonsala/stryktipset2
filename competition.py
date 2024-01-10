@@ -102,20 +102,16 @@ class Competition:
                                 results.append(result)
                                 if x > y:
                                         homeProb += result.probability
-                                if y > x:
+                                elif y > x:
                                         awayProb += result.probability
-                                if y==x:
+                                else:
                                         drawProb += result.probability
 
                 couponRow.homeProb ="{:.2%}".format(homeProb)
                 couponRow.drawProb= "{:.2%}".format(drawProb)
                 couponRow.awayProb= "{:.2%}".format(awayProb)
-                
-                #newList = sorted(results,key=lambda result: result.probability)
-                #newList.reverse()
-                #resultStringDirty = "1:" +"{:.2%}".format(homeProb) + "   X: "+ "{:.2%}".format(drawProb)+ "   2:"+"{:.2%}".format(awayProb)
-                #resultStringClean= resultStringDirty.replace ("'","")
-                
+               
+               
               
 
         def getAllResultsOLD(self, hTeamStrength, aTeamStrength):

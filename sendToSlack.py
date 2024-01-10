@@ -2,8 +2,10 @@
 
 import json
 import requests
+from links import * 
 
-
-def send_slack_message(payload, webhook):
+def sendToSlack (thisCoupon):
+   webhook = strSlackWebhook
+   payload = {"text": thisCoupon.createPayloadMessage()}
    #"""Send a Slack message to a channel via a webhook. 
-    return requests.post(webhook, json.dumps(payload))
+   return requests.post(webhook, json.dumps(payload))

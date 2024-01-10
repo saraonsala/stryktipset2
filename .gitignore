@@ -1,5 +1,6 @@
 .env
 mytestarea.py
+mytestarea_coupon.py
 links.py
 /__pycache__
 
