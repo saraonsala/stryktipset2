@@ -12,7 +12,21 @@ class Competition:
         def __init__(self, url):
                 self.games = []
                 self.teamNames =[]
+                self.numberOfMatches = 0
+                self.averageNumberOfHomeGoals = 0
+                self.averageNumberOfAwayGoals = 0
                 self.loadMatches(url)
+
+        def printGames(self):
+                for i, game in enumerate(self.games, start=1):
+                        print(f"Match {i}: {game.homeTeam} vs {game.awayTeam}, Resultat: {game.homeGoals}-{game.awayGoals}")
+        
+        def clearMatches(self):
+                self.games = []
+                self.numberOfMatches = 0
+                self.averageNumberOfHomeGoals = 0
+                self.averageNumberOfAwayGoals = 0
+                self.teamNames = []
 
         def getTeamPoints(self, strTeamName):
                 # för testsyfte för att kolla att allt fungerar.
@@ -33,20 +47,27 @@ class Competition:
 
 
         def loadMatches(self, url):
+                self.clearMatches()  # Rensa minnet innan nya matcher läses in
+                
                 webpage = urllib.request.urlopen(url)
                 datareader = csv.reader(io.TextIOWrapper(webpage))
 
                 for row in datareader:
-                        if row[6].isnumeric(): 
-                                if len(self.games) > 20:
-                                        game = Game(row[3],row[4],int(row[5]),int(row[6]), self.calculateAttackStrengthOfHomeTeam(row[3]), self.calculateAttackStrengthOfAwayTeam(row[4]))
-                                else:
-                                        game = Game(row[3],row[4],int(row[5]),int(row[6]), 1, 1)
+                    if row[6].isnumeric(): 
+                        if len(self.games) > 20:
+                                game = Game(row[3], row[4], int(row[5]), int(row[6]), self.calculateAttackStrengthOfHomeTeam(row[3]), self.calculateAttackStrengthOfAwayTeam(row[4]))
+                        else:
+                                game = Game(row[3], row[4], int(row[5]), int(row[6]), 1, 1)
 
-                                self.games.append(game)
-                                if row[3] not in self.teamNames:
-                                        self.teamNames.append(row[3])
-                #print("Listan med lag innehåller ",len(self.teamNames), "lag")
+                        self.games.append(game)
+                        self.numberOfMatches += 1
+                        self.averageNumberOfHomeGoals += game.homeGoals
+                        self.averageNumberOfAwayGoals += game.awayGoals
+                        if row[3] not in self.teamNames:
+                                self.teamNames.append(row[3])
+
+                self.averageNumberOfHomeGoals /= self.numberOfMatches
+                self.averageNumberOfAwayGoals /= self.numberOfMatches
                 self.teamNames.sort()
 
         def showTeams(self):
@@ -217,6 +238,7 @@ class Competition:
                         intGames+=1
                 try:
                         return i/intGames
+                        
                 except ZeroDivisionError:
                         return 1
 

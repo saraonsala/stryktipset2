@@ -1,6 +1,7 @@
 .env
 mytestarea.py
 mytestarea_coupon.py
+mytestarea_games.py
 links.py
 /__pycache__
 
