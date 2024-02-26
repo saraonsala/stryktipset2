@@ -5,6 +5,7 @@ from getPoisson import *
 from game import *
 from matchResult import *
 import statistics
+import pdb
 
 
 
@@ -15,6 +16,8 @@ class Competition:
                 self.numberOfMatches = 0
                 self.averageNumberOfHomeGoals = 0
                 self.averageNumberOfAwayGoals = 0
+                self.numberOfHomeGoals = 0
+                self.numberOfAwayGoals = 0
                 self.loadMatches(url)
 
         def printGames(self):
@@ -47,27 +50,28 @@ class Competition:
 
 
         def loadMatches(self, url):
-                self.clearMatches()  # Rensa minnet innan nya matcher läses in
-                
+                #self.clearMatches()  # Rensa minnet innan nya matcher läses in
+                #pdb.set_trace()
                 webpage = urllib.request.urlopen(url)
                 datareader = csv.reader(io.TextIOWrapper(webpage))
 
                 for row in datareader:
                     if row[6].isnumeric(): 
-                        if len(self.games) > 20:
+                        if len(self.games) > 100:
                                 game = Game(row[3], row[4], int(row[5]), int(row[6]), self.calculateAttackStrengthOfHomeTeam(row[3]), self.calculateAttackStrengthOfAwayTeam(row[4]))
                         else:
                                 game = Game(row[3], row[4], int(row[5]), int(row[6]), 1, 1)
 
                         self.games.append(game)
                         self.numberOfMatches += 1
-                        self.averageNumberOfHomeGoals += game.homeGoals
-                        self.averageNumberOfAwayGoals += game.awayGoals
+                        self.numberOfHomeGoals += game.homeGoals
+                        self.numberOfAwayGoals += game.awayGoals
                         if row[3] not in self.teamNames:
                                 self.teamNames.append(row[3])
 
-                self.averageNumberOfHomeGoals /= self.numberOfMatches
-                self.averageNumberOfAwayGoals /= self.numberOfMatches
+                self.averageNumberOfHomeGoals = self.numberOfHomeGoals / self.numberOfMatches
+                self.averageNumberOfAwayGoals = self.numberOfAwayGoals / self.numberOfMatches
+                
                 self.teamNames.sort()
 
         def showTeams(self):
@@ -135,36 +139,7 @@ class Competition:
                
               
 
-        def getAllResultsOLD(self, hTeamStrength, aTeamStrength):
-                homeProb = 0
-                awayProb = 0
-                drawProb = 0
-                results = []
-                for x in range (0,10):
-                        for y in range(0,10):           
-                                result = MatchResult(str(x)+"-"+str(y),getPoisson(hTeamStrength,x,1)*getPoisson(aTeamStrength,y,1))
-                                results.append(result)
-                                if x > y:
-                                        homeProb += result.probability
-                                if y > x:
-                                        awayProb += result.probability
-                                if y==x:
-                                        drawProb += result.probability
-
-                newList = sorted(results,key=lambda result: result.probability)
-                newList.reverse()
-              #  print("------------------------------")
-              #  print("1X2 --------------------------")
-              #  print("------------------------------")
-
-                print("1:", "{:.2%}".format(homeProb), "X:", "{:.2%}".format(drawProb), " 2:","{:.2%}".format(awayProb))
-              #  print("------------------------------")
-              #  print("Troligt resultat -------------")
-              #  print("------------------------------")
-              #  for outcome in range(0,5):
-              #          print(newList[outcome].result, "-", "{:.2%}".format(newList[outcome].probability))
-              #  print("------------------------------")
-              #  print("------------------------------")
+        
 
         def getTotalMadeGoals(self, specificTeam):
                 i = 0
@@ -202,7 +177,7 @@ class Competition:
                 try:
                         return i/intGames
                 except ZeroDivisionError:
-                        return 1
+                        return 0
 
         def getAverageGoalsByHomeTeam(self, specificTeam):
                 i = 0
@@ -214,7 +189,7 @@ class Competition:
                 try:
                         return i/intGames
                 except ZeroDivisionError:
-                        return 1
+                        return 0
 
         def getAverageGoalsConcededByHomeTeam(self, specificTeam):
                 i = 0
@@ -226,39 +201,33 @@ class Competition:
                 try:
                         return i/intGames
                 except ZeroDivisionError:
-                        return 1
+                        return 0
 
 
         def getAverageGoalsByAllHomeTeams(self):
                 #Hur många mål görs i snitt av hemmalagen?
-                i = 0
-                intGames = 0
-                for team in self.games:
-                        i+=team.homeGoals
-                        intGames+=1
                 try:
-                        return i/intGames
-                        
+                        return self.averageNumberOfHomeGoals
                 except ZeroDivisionError:
-                        return 1
+                        return 0
 
         def getAverageGoalsConcededByAllAwayTeams(self):
-                return self.getAverageGoalsByAllHomeTeams()
+                try:
+                        return self.averageNumberOfHomeGoals
+                except ZeroDivisionError:
+                        return 0
 
         def getAverageGoalsConcededByAllHomeTeams(self):
-                i = 0
-                intGames = 0
-                for game in self.games:
-                        i+=game.awayGoals
-                        intGames+=1
                 try:
-                        return i/intGames
+                        return self.averageNumberOfAwayGoals
                 except ZeroDivisionError:
-                        return 1
-
+                        return 0
 
         def getAverageGoalsByAllAwayTeams(self):
-                return self.getAverageGoalsConcededByAllHomeTeams()
+                try:
+                        return self.averageNumberOfAwayGoals
+                except ZeroDivisionError:
+                        return 0
 
 
 
@@ -268,32 +237,51 @@ class Competition:
         def calculateAttackStrengthOfHomeTeam(self, nameHomeTeam):
                 #Vad har hemmalaget för offensiv styrka
                 #Hur många mål gör laget på hemmaplan i förhållande till de andra lagen
-                return (self.getAverageGoalsByHomeTeam(nameHomeTeam)/self.getAverageGoalsByAllHomeTeams())
+                try:
+                        return (self.getAverageGoalsByHomeTeam(nameHomeTeam)/self.getAverageGoalsByAllHomeTeams())
+                except ZeroDivisionError:
+                        return 0
 
         def calculateDefensiveStrengthOfHomeTeam(self, nameHomeTeam):
                 #Vad har hemmalaget för defensiv styrka
                 #Hur många mål släpper din in på hemmaplan i förhållande till de andra lagen
-                return (self.getAverageGoalsConcededByHomeTeam(nameHomeTeam)/self.getAverageGoalsConcededByAllHomeTeams())
-
+                try: 
+                        return (self.getAverageGoalsConcededByHomeTeam(nameHomeTeam)/self.getAverageGoalsConcededByAllHomeTeams())
+                except ZeroDivisionError:
+                        return 0
+        
 
         def calculateAttackStrengthOfAwayTeam(self, nameAwayTeam):
                 #Vad har hemmalaget för offensiv styrka
                 #Hur många mål gör laget på bortaplan i förhållande till de andra lagen
-                return  (self.getAverageGoalsByAwayTeam(nameAwayTeam)/self.getAverageGoalsByAllAwayTeams()) 
+                try: 
+                        return  (self.getAverageGoalsByAwayTeam(nameAwayTeam)/self.getAverageGoalsByAllAwayTeams()) 
+                except ZeroDivisionError:
+                        return 0
 
         def calculateDefensiveStrengthOfAwayTeam(self, nameAwayTeam):
                 #Vad har bortalaget för defensiv styrka
                 #Hur många mål släpper din in på hemmaplan i förhållande till de andra lagen
-                return  (self.getAverageGoalsConcededByAwayTeam(nameAwayTeam)/self.getAverageGoalsConcededByAllAwayTeams()) 
-
+                try: 
+                        return  (self.getAverageGoalsConcededByAwayTeam(nameAwayTeam)/self.getAverageGoalsConcededByAllAwayTeams()) 
+                except ZeroDivisionError:
+                        return 0
+                
         def calculateHomeTeamGoalExpectancy(self, strNameHomeTeam, strNameAwayTeam):
                 #Home Team Goal Expectancy: Home attacking strength (1.20) x away defensive strength (1.07) x average goals home (1.57) = 2.02
-                return self.calculateAttackStrengthOfHomeTeam(strNameHomeTeam) * self.calculateDefensiveStrengthOfAwayTeam(strNameAwayTeam) * self.getAverageGoalsByAllHomeTeams()
+                try:
+                        return self.calculateAttackStrengthOfHomeTeam(strNameHomeTeam) * self.calculateDefensiveStrengthOfAwayTeam(strNameAwayTeam) * self.getAverageGoalsByAllHomeTeams()
+                except ZeroDivisionError: 
+                        return 0
+                
 
         def calculateAwayTeamGoalExpectancy(self, strNameHomeTeam, strNameAwayTeam):
                 #Away Team Goal Expectancy: Away attacking strength (1.16) x home defensive strength (0.48) x average goals away (0.96) = 0.53
-                return self.calculateAttackStrengthOfAwayTeam(strNameAwayTeam) * self.calculateDefensiveStrengthOfHomeTeam(strNameHomeTeam) * self.getAverageGoalsByAllAwayTeams()
- 
+                try:
+                        return self.calculateAttackStrengthOfAwayTeam(strNameAwayTeam) * self.calculateDefensiveStrengthOfHomeTeam(strNameHomeTeam) * self.getAverageGoalsByAllAwayTeams()
+                except ZeroDivisionError:
+                        return 0
+                
         def calculateExpectedOutcome(self, nameHomeTeam, nameAwayTeam):         
                 
                 #BEHÖVS DENNA??????!

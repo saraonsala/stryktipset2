@@ -3,6 +3,8 @@ body{
     background-image: url("peleWithGradient.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-size: cover;
+   
 
 }
 
@@ -19,7 +21,8 @@ h2 {
 
 .probabilities {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 9px;
+    font-size: 14px;
+    color: gray;
   }
 
 .teamnames {
@@ -34,12 +37,15 @@ h2 {
     background: #091b3d;
     color: white;
     text-align: center;
-    align-items: center;
-    font: 14px Arial, sans-serif;
-    line-height: 20px;
+    
+    font: 15px Arial, sans-serif, bold;
+    line-height: 15px;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+    margin: 10px;
+    
+
 }
 
 .yellowsquare{
@@ -50,8 +56,8 @@ h2 {
     height: 300px;
     position: absolute;
     z-index: 2;
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-left: 130px;
+    margin-top: 130px;
     
     
     
@@ -64,8 +70,8 @@ h2 {
     height: 300px;
     position: absolute;
     z-index: 1;
-    margin-left: 60px;
-    margin-top: 60px;
+    margin-left: 140px;
+    margin-top: 140px;
 }
 .theBiggerContainer{
     width: 90%;
@@ -125,12 +131,15 @@ table{
     border-spacing: 0px;
   }
 
-td{
-    padding: 10px    
+td {
+    padding: 20px; /* Adjust the value as needed */
+    vertical-align: middle; /* Center the content vertically */
+    text-align: center; /* Center the content horizontally */
 }
 
 tr:nth-child(odd) {
     background-color:#eee;
+
 }
 tr:nth-child(even) {
     background-color:#fff;
