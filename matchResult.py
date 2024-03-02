@@ -3,4 +3,4 @@ class MatchResult:
                 self.result = result
                 #self.probability = "{:.2%}".format(probability)
                 self.probability = float(probability)
-                #print(self.result, ":", self.probability)
+                print(self.result, ":", self.probability)

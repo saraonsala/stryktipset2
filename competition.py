@@ -282,11 +282,4 @@ class Competition:
                 except ZeroDivisionError:
                         return 0
                 
-        def calculateExpectedOutcome(self, nameHomeTeam, nameAwayTeam):         
-                
-                #BEHÖVS DENNA??????!
-                #print(nameHomeTeam+' - '+ nameAwayTeam)
-                
-                strResult = self.getAllResults(nameHomeTeam, nameAwayTeam)
-                #print(strResult)
-                return strResult
+
