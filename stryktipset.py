@@ -31,7 +31,7 @@ thisCoupon.addSigns(6,4,4)
 
 
 #thisCoupon.printDebugInfo()
-#thisCoupon.printCoupon()
+thisCoupon.printCoupon()
 
 # Skickar meddelande till Slack
 sendToSlack(thisCoupon)

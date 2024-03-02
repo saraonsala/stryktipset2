@@ -22,7 +22,7 @@ def cleanTeamNames(strTeamName):
                 return 'QPR'
         elif strTeamName == 'Sheffield U':
                 return 'Sheffield United'
-        elif strTeamName == 'Nottingham Forest':
+        elif strTeamName == "Nottingham":
                 return "Nott'm Forest"
         elif strTeamName == 'Blackburn Rovers':
                 return "Blackburn"
